@@ -1,5 +1,7 @@
+import { Guid } from "../interfaces/utils";
+
 export type VehicleDto = {
-  id: string | number;
+  eID: Guid;
   name: string;
   brand: string;
   model: string;
