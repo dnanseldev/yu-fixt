@@ -1,7 +1,8 @@
 import { Router } from "express";
 import ServiceNoteController from "../controllers/service-note";
+import "dotenv/config";
 
-const API_URL = "/api/v1";
+const API_URL = process.env.BASE_API_URL;
 
 export default class ServiceNoteRoute {
   private route: Router;

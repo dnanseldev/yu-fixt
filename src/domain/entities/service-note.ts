@@ -1,6 +1,6 @@
 import { Guid } from "../interfaces/utils";
 
-export type serviceNoteDTO = {
+export type ServiceNoteDTO = {
   eID: Guid;
   vehicleID: Guid;
   userID: Guid;
