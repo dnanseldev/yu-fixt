@@ -1,15 +1,16 @@
 import { Router } from "express";
-import ServiceNoteController from "../controllers/service-note";
+import ServiceNoteController from "../controllers/service-note.controller";
 import "dotenv/config";
 
 const API_URL = process.env.BASE_API_URL;
 
 export default class ServiceNoteRoute {
   private route: Router;
-  private serviceNoteController = new ServiceNoteController();
+  private serviceNoteController: ServiceNoteController;
 
   constructor() {
     this.route = Router();
+    this.serviceNoteController = new ServiceNoteController();
 
     this.route.get("/", this.serviceNoteController.home);
     this.route.get(

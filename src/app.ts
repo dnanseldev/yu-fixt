@@ -1,5 +1,5 @@
 import express, { Application } from "express";
-import ServiceNoteRoute from "./infra/routes/service-note";
+import ServiceNoteRoute from "./infra/routes/service-note.route";
 
 export default class App {
   public server: Application;
