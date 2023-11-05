@@ -1,3 +1,3 @@
 export type Guid = {
-  id: string | number;
+  value: string | number;
 };

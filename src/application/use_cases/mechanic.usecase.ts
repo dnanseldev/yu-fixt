@@ -1,4 +1,5 @@
 import { ServiceNoteDTO } from "../../domain/entities/service-note";
+import { Guid } from "../../domain/interfaces/utils";
 import ICommumRepository from "../interfaces/basic.repository";
 
 export default class MechanicUseCases {
@@ -22,6 +23,10 @@ export default class MechanicUseCases {
     //return "Das ist ein test";
   }
   */
+
+  async getEntityById(id: Guid): Promise<unknown> {
+    return this.repository.FindOne(id);
+  }
   async getAllEntities(): Promise<unknown[]> {
     return this.repository.FindAll();
   }

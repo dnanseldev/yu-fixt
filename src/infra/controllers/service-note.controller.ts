@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { ServiceNoteDTO } from "../../domain/entities/service-note";
 import MechanicUseCases from "../../application/use_cases/mechanic.usecase";
 import { InMemoryServiceNoteRepository } from "../repositories/inmemory-service-note.repository";
+import { Guid } from "../../domain/interfaces/utils";
 
 export default class ServiceNoteController {
   //service_notes: ServiceNoteDTO[] = [];
@@ -25,7 +26,8 @@ export default class ServiceNoteController {
   };
 
   addNewNote = async (req: Request, res: Response): Promise<void> => {
-    const new_service_note: ServiceNoteDTO = req.body;
+    const new_service_note = req.body as ServiceNoteDTO;
+
     //const str = this.mech_use_case.helloTest();
     // console.log(await str);
     await this.mech_use_case.SaveEntity(new_service_note);
@@ -62,9 +64,18 @@ export default class ServiceNoteController {
   };
 
   getNoteById = async (req: Request, res: Response): Promise<void> => {
+    console.log(req.params);
+    const ID: Guid = {
+      value: req.params.id,
+    };
+
+    const service_note = await this.mech_use_case.getEntityById(ID);
+
     res.status(200).json({
       status: "success",
-      data: {},
+      data: {
+        sn: service_note,
+      },
     });
   };
 

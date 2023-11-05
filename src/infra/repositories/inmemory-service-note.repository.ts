@@ -25,7 +25,7 @@ export class InMemoryServiceNoteRepository
   }
 
   async FindOne(id: Guid): Promise<ServiceNoteDTO> {
-    return this.serviceNotes.find((sn) => sn.eID === id)!;
+    return this.serviceNotes.find((sn) => sn.eID.value === id.value)!;
   }
 
   async FindAll(): Promise<ServiceNoteDTO[]> {
