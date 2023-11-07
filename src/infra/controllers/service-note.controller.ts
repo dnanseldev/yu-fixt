@@ -1,8 +1,12 @@
 import { Request, Response } from "express";
-import { ServiceNoteDTO } from "../../domain/entities/service-note";
+import {
+  ServiceNote,
+  ServiceNoteDTO,
+} from "../../domain/entities/service-note";
 import MechanicUseCases from "../../application/use_cases/mechanic.usecase";
 import { InMemoryServiceNoteRepository } from "../repositories/inmemory-service-note.repository";
 import { Guid } from "../../domain/interfaces/utils";
+import { TEntity } from "../../domain/interfaces/base-entity";
 
 export default class ServiceNoteController {
   //service_notes: ServiceNoteDTO[] = [];
@@ -27,6 +31,7 @@ export default class ServiceNoteController {
 
   addNewNote = async (req: Request, res: Response): Promise<void> => {
     const new_service_note = req.body as ServiceNoteDTO;
+    const esn: TEntity = new ServiceNote(new_service_note);
 
     //const str = this.mech_use_case.helloTest();
     // console.log(await str);

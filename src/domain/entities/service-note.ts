@@ -1,3 +1,4 @@
+import { TEntity } from "../interfaces/base-entity";
 import { Guid } from "../interfaces/utils";
 
 export type ServiceNoteDTO = {
@@ -10,4 +11,14 @@ export type ServiceNoteDTO = {
   sponsored: boolean;
 };
 
-export class ServiceNote {}
+export class ServiceNote extends TEntity {
+  readonly is_valid_state: boolean = false;
+  constructor(readonly serviceNote: ServiceNoteDTO) {
+    super();
+    this.serviceNote = serviceNote;
+  }
+
+  get getServiceNote() {
+    return this.serviceNote;
+  }
+}
