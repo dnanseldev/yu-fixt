@@ -7,6 +7,7 @@ import MechanicUseCases from "../../application/use_cases/mechanic.usecase";
 import { InMemoryServiceNoteRepository } from "../repositories/inmemory-service-note.repository";
 import { Guid } from "../../domain/interfaces/utils";
 import { TEntity } from "../../domain/interfaces/base-entity";
+import MongoDBServiceNoteRepository from "../repositories/mongodb-service_note.repository";
 
 export default class ServiceNoteController {
   //service_notes: ServiceNoteDTO[] = [];
@@ -15,8 +16,9 @@ export default class ServiceNoteController {
 
   constructor() {
     this.mech_use_case = new MechanicUseCases(
-      new InMemoryServiceNoteRepository()
+      new MongoDBServiceNoteRepository()
     );
+    //new InMemoryServiceNoteRepository()
   }
 
   templateModel = async (req: Request, res: Response): Promise<void> => {

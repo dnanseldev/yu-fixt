@@ -3,9 +3,44 @@
 
 generator client {
   provider = "prisma-client-js"
+  //previewFeatures = ["mongodb"]
 }
 
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
+}
+
+model ServiceNote {
+  eID            String  @id @default(auto()) @map("_id") @db.ObjectId
+  description    String
+  agent_so       TUser
+ // customer_so    TCustomer
+  sponsored      Boolean
+  created_at     DateTime
+  changed_at     DateTime
+}
+
+type TCustomer {
+  name String
+  main_document_number String
+  second_document_number String
+  driver_license_number String
+  address TAddress  
+}
+
+type TAddress {
+  street     String
+  number     Int
+  complement String
+  city       String
+  zip_code   String
+}
+
+type TUser {
+  username String
+  email String
+  password String
+  sys_id Int[]
+  current_id Int
 }
