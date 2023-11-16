@@ -1,6 +1,10 @@
 #!/bin/bash
 
-docker-compose -f docker-compose-prisma.yml up -d
+docker-compose -f docker-compose-dev.yml up -d
+
+sleep 5
+
+docker exec mongo1 /scripts/rs-init.sh
 
 
 

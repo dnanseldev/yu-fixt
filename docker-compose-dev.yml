@@ -1,24 +1,44 @@
-# Use root/example as user/password credentials
-version: "3.3"
+version: "3.8"
 
 services:
-  mongodb:
-    container_name: cmongodb
+  mongo1:
+    container_name: mongo1
     image: mongo
-    restart: always
-    ports:
-      - 27017:27017
-    networks:
-      - yufix_network
     volumes:
-      - ./db:/data/db
-    #command: [--auth]
-    #env_file:
-    #- .env
-    #MONGO_INITDB_ROOT_USERNAME: ${MONGO_USR}
-    #MONGO_INITDB_ROOT_PASSWORD: ${SECRETE_PWD}
-    #MONGO_INITDB_DATABASE: ${MONGO_DB}
+      - ./db1:/data/db
+      - ./scripts/rs-init.sh:/scripts/rs-init.sh
+    networks:
+      - mongors-network
+    ports:
+      - 27021:27017
+    links:
+      - mongo2
+      - mongo3
+    restart: always
+    entrypoint: ["/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs"]
+  mongo2:
+    container_name: mongo2
+    image: mongo
+    volumes:
+      - ./db2:/data/db
+    networks:
+      - mongors-network
+    ports:
+      - 27022:27017
+    restart: always
+    entrypoint: ["/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs"]
+  mongo3:
+    container_name: mongo3
+    image: mongo
+    volumes:
+      - ./db3:/data/db
+    networks:
+      - mongors-network
+    ports:
+      - 27023:27017
+    restart: always
+    entrypoint: ["/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs"]
 
 networks:
-  yufix_network:
+  mongors-network:
     driver: bridge

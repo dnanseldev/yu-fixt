@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker-compose -f docker-compose-replicaset.yml down
+docker-compose -f docker-compose-dev.yml down
