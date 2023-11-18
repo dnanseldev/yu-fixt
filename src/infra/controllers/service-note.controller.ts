@@ -4,7 +4,6 @@ import {
   ServiceNoteDTO,
 } from "../../domain/entities/service-note";
 import MechanicUseCases from "../../application/use_cases/mechanic.usecase";
-import { InMemoryServiceNoteRepository } from "../repositories/inmemory-service-note.repository";
 import { Guid } from "../../domain/interfaces/utils";
 import { TEntity } from "../../domain/interfaces/base-entity";
 import MongoDBServiceNoteRepository from "../repositories/mongodb-service_note.repository";

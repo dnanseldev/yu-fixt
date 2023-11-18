@@ -1,44 +1,21 @@
-version: "3.8"
-
+version: "3.7"
 services:
-  mongo1:
-    container_name: mongo1
+  mongodb:
+    # This image automatically creates a replica set required for transactions
     image: mongo
-    volumes:
-      - ./db1:/data/db
-      - ./scripts/rs-init.sh:/scripts/rs-init.sh
-    networks:
-      - mongors-network
-    ports:
-      - 27021:27017
-    links:
-      - mongo2
-      - mongo3
+    container_name: ct_mongo
     restart: always
-    entrypoint: ["/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs"]
-  mongo2:
-    container_name: mongo2
-    image: mongo
-    volumes:
-      - ./db2:/data/db
     networks:
-      - mongors-network
-    ports:
-      - 27022:27017
-    restart: always
-    entrypoint: ["/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs"]
-  mongo3:
-    container_name: mongo3
-    image: mongo
+      - yufix_network
     volumes:
-      - ./db3:/data/db
-    networks:
-      - mongors-network
+      - ./db:/data/db
+    #environment:
+    #MONGO_INITDB_ROOT_USERNAME: ${MONGO_USR}
+    ##MONGO_INITDB_DATABASE: ${MONGO_DB}
+    #INIT_WAIT_SEC: 3
     ports:
-      - 27023:27017
-    restart: always
-    entrypoint: ["/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs"]
+      - 27017:27017
 
 networks:
-  mongors-network:
+  yufix_network:
     driver: bridge
