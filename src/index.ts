@@ -1,5 +1,5 @@
 import App from "./app";
-import "dotenv/config";
+//import "dotenv/config";
 
 const devServer = process.env.SANDBOX;
 //console.log(`Content of devServer: ${devServer}`, typeof devServer);
