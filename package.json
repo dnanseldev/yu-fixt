@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev_bakp": "tsx ./src/index.ts",
-    "dev": "ts-node-dev ./src/index.ts",
+    "dev": "tsx watch ./src/index.ts",
     "build": "rimraf ./dist && npx tsc",
     "start": "npm run build && node ./dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,12 +24,13 @@
     "@types/express": "^4.17.20",
     "@types/node": "^20.8.10",
     "rimraf": "^5.0.5",
-    "ts-node-dev": "^2.0.0",
     "tsx": "^3.14.0",
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "bson": "^6.2.0",
     "dotenv": "^16.3.1",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mongoose": "^8.0.1"
   }
 }
